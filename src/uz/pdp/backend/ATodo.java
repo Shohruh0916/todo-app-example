@@ -21,6 +21,7 @@ public class ATodo implements TodoService{
                 todos[i]=todos[i+1];
                 index--;
             }
+
             return true;
         }else{
             return false;
