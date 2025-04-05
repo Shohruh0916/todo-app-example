@@ -14,19 +14,28 @@ public class ATodo implements TodoService{
 
     @Override
     public boolean delete(String todoID) {
-        for(int i=0; i< todos.length; i++){
-            Todo todo=todos[i];
-            if(todo.getId().equals(todoID)){
-                todos[i]=null;
+        int deletingIndex = getTodoIndexByTodoID(todoID);
+        if(deletingIndex!=-1){
+            for(int i=deletingIndex; i<index; i++){
+                todos[i]=todos[i+1];
                 index--;
-                return  true;
             }
+            return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
     @Override
-    public boolean uptade(Todo todo) {
+    public boolean uptade(TodoUpdateDTO dto) {
+        String totdoId= dto.id();
+        int todoIndex=getTodoIndexByTodoID(totdoId);
+        if(todoIndex!=-1){
+            Todo todo=todos[todoIndex];
+            todo.setTitle(dto.title());
+            todos[todoIndex]=todo;
+            return true;
+        }
         return false;
     }
 
@@ -37,6 +46,16 @@ public class ATodo implements TodoService{
 
     @Override
     public Todo[] getAll() {
-        return Arrays.copyOf(todos,index);
+        return Arrays.copyOf(todos,index+1);
+    }
+
+    private int getTodoIndexByTodoID(String todoID) {
+        for(int i=0; i<index; i++){
+            Todo todo=todos[i];
+            if(todo.getId().equals(todoID)){
+               return i;
+            }
+        }
+        return -1;
     }
 }
