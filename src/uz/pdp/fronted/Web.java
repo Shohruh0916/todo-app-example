@@ -5,7 +5,7 @@ import uz.pdp.backend.*;
 import java.util.Scanner;
 
 public class Web {
-    static TodoService todoService=new TodoServiceIMPL();
+    static TodoService todoService=new ATodo();
     public static void main(String[] args) {
         testCreateTodoMethod();
         testGetAllTodoMethod();
