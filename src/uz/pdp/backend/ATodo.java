@@ -19,7 +19,7 @@ public class ATodo implements TodoService{
             if(todo.getId().equals(todoID)){
                 todos[i]=null;
                 index--;
-                return true;
+                return  true;
             }
         }
         return false;
